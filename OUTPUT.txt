@@ -1,0 +1,43 @@
+Z aedeploy gcloud app deploy
+You are about to deploy the following services:
+ - adam-gae-test/default/20161024t182240 (from [/private/var/folders/ny/c7c3386x2tvd2r4lchmp68sw0000gn/T/aedeploy665000402/app.yaml])
+     Deploying to URL: [https://adam-gae-test.appspot.com]
+
+Do you want to continue (Y/n)?
+
+If this is your first deployment, this may take a while...done.
+
+Beginning deployment of service [default]...
+WARNING: Deployment of App Engine Flexible Environment apps is currently in Beta
+WARNING: Could not generate [source-context.json]: Could not list remote URLs from sourcedirectory: /private/var/folders/ny/c7c3386x2tvd2r4lchmp68sw0000gn/T/aedeploy665000402
+Building and pushing image for service [default]
+Started cloud build [ef7b96d4-778e-4f75-b1cd-424c9adc2da6].
+To see logs in the Cloud Console: https://console.developers.google.com/logs?project=adam-gae-test&service=cloudbuild.googleapis.com&key1=ef7b96d4-778e-4f75-b1cd-424c9adc2da6
+---------------------------------- REMOTE BUILD OUTPUT -----------------------------------
+starting build "ef7b96d4-778e-4f75-b1cd-424c9adc2da6"
+
+FETCHSOURCE
+Fetching storage object: gs://staging.adam-gae-test.appspot.com/us.gcr.io/adam-gae-test/appengine/default.20161024t182240:latest#1477358643500000
+Copying gs://staging.adam-gae-test.appspot.com/us.gcr.io/adam-gae-test/appengine/default.20161024t182240:latest#1477358643500000...
+Downloading file:///tmp/source-archive.tgz:                      317.71 KiB/317.71 KiB
+BUILD
+Already have image (with digest): gcr.io/cloud-builders/docker
+Sending build context to Docker daemon 1.722 MB
+Step 1 : FROM gcr.io/google_appengine/golang
+ ---> 3107cbbf16f7
+Step 2 : COPY . /go/src/app
+ ---> 380f00ad5d4a
+Removing intermediate container 46078f2c37a5
+Step 3 : RUN go-wrapper install -tags appenginevm
+ ---> Running in d563eb7b068f
++ exec go install -v -tags appenginevm
+main.go:4:2: cannot find package "gae-test/view" in any of:
+        /usr/local/go/src/gae-test/view (from $GOROOT)
+        /go/src/gae-test/view (from $GOPATH)
+        /go/src/app/_gopath/src/gae-test/view
+The command '/bin/sh -c go-wrapper install -tags appenginevm' returned a non-zero code: 1
+ERROR
+ERROR: build step "gcr.io/cloud-builders/docker@sha256:1b5a8642d04ef785f7dd2dbb0296f837895f50442fdfe5ebd0b04c206ab0b1b5" failed: exit status 1
+
+ERROR: (gcloud.app.deploy) Error Response: [2] Build failed; check build logs for details
+aedeploy: Error: unable to run "gcloud app deploy": exit status 1
