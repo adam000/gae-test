@@ -1,0 +1,152 @@
+Z aedeploy gcloud --verbosity debug app deploy
+DEBUG: Running gcloud.app.deploy with Namespace(__calliope_internal_deepest_parser=ArgumentParser(prog='gcloud.app.deploy', usage=None, description='Deploy the local code and/or configuration of your app to App Engine.', version=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=False), account=None, authority_selector=None, authorization_token_file=None, bucket=None, calliope_command=<googlecloudsdk.calliope.backend.Command object at 0x11042d050>, command_path=['gcloud', 'app', 'deploy'], configuration=None, credential_file_override=None, deployables=[], docker_build=None, document=None, flatten=None, format=None, h=None, help=None, http_timeout=None, ignore_bad_certs=False, image_url=None, log_http=None, project=None, promote=None, quiet=None, server=None, skip_image_url_validation=False, skip_staging=False, stop_previous_version=None, trace_email=None, trace_log=None, trace_token=None, user_output_enabled=None, verbosity='debug', version=None).
+DEBUG: API endpoint: [https://appengine.googleapis.com/], API version: [v1beta5]
+You are about to deploy the following services:
+ - adam-gae-test/default/20161111t135528 (from [/private/var/folders/ny/c7c3386x2tvd2r4lchmp68sw0000gn/T/aedeploy220628834/app.yaml])
+     Deploying to URL: [https://adam-gae-test.appspot.com]
+
+Do you want to continue (Y/n)?
+
+DEBUG: No bucket specified, retrieving default bucket.
+DEBUG: Using bucket [gs://staging.adam-gae-test.appspot.com/].
+If this is your first deployment, this may take a while...DEBUG: Host: appengine.google.com
+DEBUG: _Authenticate configuring auth; needs_auth=False
+DEBUG: Sending request to https://appengine.google.com/api/vms/prepare?app_id=adam-gae-test headers={'X-appcfg-api-version': '1', 'content-length': '0', 'Content-Type': 'application/octet-stream'} body=
+INFO: Attempting refresh to obtain initial access_token
+INFO: Refreshing access_token
+If this is your first deployment, this may take a while...|DEBUG: Got response: {bucket: vm-containers.adam-gae-test.appspot.com, path: /containers}
+
+If this is your first deployment, this may take a while...done.
+
+Beginning deployment of service [default]...
+DEBUG: No staging command found for runtime [go] and environment [MANAGED_VMS].
+WARNING: Deployment of App Engine Flexible Environment apps is currently in Beta
+INFO: Not checking for [Custom] because runtime is [go]
+INFO: Checking for Go.
+INFO: Found Go main in /private/var/folders/ny/c7c3386x2tvd2r4lchmp68sw0000gn/T/aedeploy220628834/main.go
+INFO: Not writing [app.yaml], it already exists.
+DEBUG: Could not call git with args ('config', '--get-regexp', 'remote\\.(.*)\\.url'): Command '['git', 'config', '--get-regexp', 'remote\\.(.*)\\.url']' returned non-zero exit status 1
+WARNING: Could not generate [source-context.json]: Could not list remote URLs from source directory: /private/var/folders/ny/c7c3386x2tvd2r4lchmp68sw0000gn/T/aedeploy220628834
+Building and pushing image for service [default]
+INFO: Uploading [/var/folders/ny/c7c3386x2tvd2r4lchmp68sw0000gn/T/tmpKQ6DFO/src.tgz] to [us.gcr.io/adam-gae-test/appengine/default.20161111t135528:latest]
+DEBUG: Using builder image: [gcr.io/cloud-builders/docker]
+Started cloud build [7989d658-08dd-40d1-a3e6-fa86dd9183fd].
+DEBUG: GCS logfile url is https://www.googleapis.com/storage/v1/b/staging.adam-gae-test.appspot.com/o/log-7989d658-08dd-40d1-a3e6-fa86dd9183fd.txt?alt=media
+To see logs in the Cloud Console: https://console.developers.google.com/logs?project=adam-gae-test&service=cloudbuild.googleapis.com&key1=7989d658-08dd-40d1-a3e6-fa86dd9183fd
+DEBUG: Operation [operations/build/adam-gae-test/Nzk4OWQ2NTgtMDhkZC00MGQxLWEzZTYtZmE4NmRkOTE4M2Zk] not complete. Waiting 1s.
+DEBUG: Reading GCS logfile: 206 (read 213 bytes)
+--------------------------------------------------------- REMOTE BUILD OUTPUT ---------------------------------------------------------
+starting build "7989d658-08dd-40d1-a3e6-fa86dd9183fd"
+
+FETCHSOURCE
+Fetching storage object: gs://staging.adam-gae-test.appspot.com/us.gcr.io/adam-gae-test/appengine/default.20161111t135528:latest#1478901344646000
+DEBUG: Operation [operations/build/adam-gae-test/Nzk4OWQ2NTgtMDhkZC00MGQxLWEzZTYtZmE4NmRkOTE4M2Zk] not complete. Waiting 1s.
+DEBUG: Reading GCS logfile: 206 (read 2267 bytes)
+Copying gs://staging.adam-gae-test.appspot.com/us.gcr.io/adam-gae-test/appengine/default.20161111t135528:latest#1478901344646000...
+Downloading file:///tmp/source-archive.tgz:                      2.7 MiB/2.7 MiB
+BUILD
+DEBUG: Operation [operations/build/adam-gae-test/Nzk4OWQ2NTgtMDhkZC00MGQxLWEzZTYtZmE4NmRkOTE4M2Zk] not complete. Waiting 1s.
+DEBUG: Reading GCS logfile: 206 (read 1213 bytes)
+Already have image (with digest): gcr.io/cloud-builders/docker
+Sending build context to Docker daemon 9.369 MB
+Step 1 : FROM gcr.io/google_appengine/golang
+ ---> 3107cbbf16f7
+Step 2 : COPY . /go/src/app
+ ---> 9154bb8d85ad
+Removing intermediate container 02c1c3e20b76
+Step 3 : RUN go-wrapper install -tags appenginevm
+ ---> Running in 1be8835d228f
+DEBUG: Operation [operations/build/adam-gae-test/Nzk4OWQ2NTgtMDhkZC00MGQxLWEzZTYtZmE4NmRkOTE4M2Zk] not complete. Waiting 1s.
+DEBUG: Reading GCS logfile: 206 (read 482 bytes)
++ exec go install -v -tags appenginevm
+main.go:4:2: cannot find package "gae-test/view" in any of:
+	/usr/local/go/src/gae-test/view (from $GOROOT)
+	/go/src/gae-test/view (from $GOPATH)
+	/go/src/app/_gopath/src/gae-test/view
+The command '/bin/sh -c go-wrapper install -tags appenginevm' returned a non-zero code: 1
+ERROR
+ERROR: build step "gcr.io/cloud-builders/docker@sha256:1b5a8642d04ef785f7dd2dbb0296f837895f50442fdfe5ebd0b04c206ab0b1b5" failed: exit status 1
+
+DEBUG: Operation [operations/build/adam-gae-test/Nzk4OWQ2NTgtMDhkZC00MGQxLWEzZTYtZmE4NmRkOTE4M2Zk] complete. Result: {
+    "metadata": {
+        "@type": "type.googleapis.com/google.devtools.cloudbuild.v1.BuildOperationMetadata",
+        "build": {
+            "finishTime": "2016-11-11T21:55:50.937289Z",
+            "status": "FAILURE",
+            "startTime": "2016-11-11T21:55:45.391440Z",
+            "logsBucket": "staging.adam-gae-test.appspot.com",
+            "readyTime": "2016-11-11T21:55:45.287798Z",
+            "timeout": "600s",
+            "id": "7989d658-08dd-40d1-a3e6-fa86dd9183fd",
+            "source": {
+                "storageSource": {
+                    "object": "us.gcr.io/adam-gae-test/appengine/default.20161111t135528:latest",
+                    "bucket": "staging.adam-gae-test.appspot.com"
+                }
+            },
+            "steps": [
+                {
+                    "args": [
+                        "build",
+                        "-t",
+                        "us.gcr.io/adam-gae-test/appengine/default.20161111t135528:latest",
+                        "."
+                    ],
+                    "name": "gcr.io/cloud-builders/docker"
+                }
+            ],
+            "sourceProvenance": {
+                "resolvedStorageSource": {
+                    "generation": "1478901344646000",
+                    "object": "us.gcr.io/adam-gae-test/appengine/default.20161111t135528:latest",
+                    "bucket": "staging.adam-gae-test.appspot.com"
+                },
+                "fileHashes": {
+                    "gs://staging.adam-gae-test.appspot.com/us.gcr.io/adam-gae-test/appengine/default.20161111t135528:latest#1478901344646000": {
+                        "fileHash": [
+                            {
+                                "type": "MD5",
+                                "value": "Nm+23YNgrIZh9KE5jEdSsw=="
+                            }
+                        ]
+                    }
+                }
+            },
+            "projectId": "adam-gae-test",
+            "images": [
+                "us.gcr.io/adam-gae-test/appengine/default.20161111t135528:latest"
+            ],
+            "createTime": "2016-11-11T21:55:45.065893Z",
+            "logUrl": "https://console.developers.google.com/logs?project=adam-gae-test&service=cloudbuild.googleapis.com&key1=7989d658-08dd-40d1-a3e6-fa86dd9183fd"
+        }
+    },
+    "done": true,
+    "name": "operations/build/adam-gae-test/Nzk4OWQ2NTgtMDhkZC00MGQxLWEzZTYtZmE4NmRkOTE4M2Zk",
+    "error": {
+        "message": "Build failed; check build logs for details",
+        "code": 2
+    }
+}
+DEBUG: (gcloud.app.deploy) Error Response: [2] Build failed; check build logs for details
+Traceback (most recent call last):
+  File "/Users/atg/google-cloud-sdk/lib/googlecloudsdk/calliope/cli.py", line 740, in Execute
+    resources = args.calliope_command.Run(cli=self, args=args)
+  File "/Users/atg/google-cloud-sdk/lib/googlecloudsdk/calliope/backend.py", line 1648, in Run
+    resources = command_instance.Run(args)
+  File "/Users/atg/google-cloud-sdk/lib/surface/app/deploy.py", line 53, in Run
+    return deploy_util.RunDeploy(args, app_create=True)
+  File "/Users/atg/google-cloud-sdk/lib/googlecloudsdk/command_lib/app/deploy_util.py", line 410, in RunDeploy
+    all_services)
+  File "/Users/atg/google-cloud-sdk/lib/googlecloudsdk/command_lib/app/deploy_util.py", line 248, in Deploy
+    new_version, service, source_dir, image, code_bucket_ref)
+  File "/Users/atg/google-cloud-sdk/lib/googlecloudsdk/command_lib/app/deploy_util.py", line 187, in _PossiblyBuildAndPush
+    code_bucket_ref)
+  File "/Users/atg/google-cloud-sdk/lib/googlecloudsdk/api_lib/app/deploy_command_util.py", line 218, in BuildAndPushDockerImage
+    image.tagged_repo)
+  File "/Users/atg/google-cloud-sdk/lib/googlecloudsdk/api_lib/app/cloud_build.py", line 205, in ExecuteCloudBuild
+    retry_callback=log_tailer.Poll)
+  File "/Users/atg/google-cloud-sdk/lib/googlecloudsdk/api_lib/app/api/operations.py", line 70, in WaitForOperation
+    encoding.MessageToPyValue(completed_operation.error)))
+OperationError: Error Response: [2] Build failed; check build logs for details
+ERROR: (gcloud.app.deploy) Error Response: [2] Build failed; check build logs for details
+aedeploy: Error: unable to run "gcloud --verbosity debug app deploy": exit status 1
